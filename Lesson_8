@@ -1,0 +1,88 @@
+1. Переустановить операционную систему (по желанию, для дополнительной практики)
+Рабочий ноут на Убунте, есть виртуалки + Мак. Практики хватает )))
+
+
+2. Подключить репозиторий Docker.
+
+
+Установленный докер.
+
+kokorevpv@i109154743:~$ sudo systemctl status docker
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2023-04-12 09:41:11 MSK; 10s ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 16618 (dockerd)
+      Tasks: 13
+     Memory: 26.8M
+     CGroup: /system.slice/docker.service
+             └─16618 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Apr 12 09:41:11 i109154743 dockerd[16618]: time="2023-04-12T09:41:11.784013786+03:00" level=inf>
+Apr 12 09:41:11 i109154743 dockerd[16618]: time="2023-04-12T09:41:11.806335387+03:00" level=inf>
+Apr 12 09:41:11 i109154743 dockerd[16618]: time="2023-04-12T09:41:11.808108748+03:00" level=inf>
+Apr 12 09:41:11 i109154743 dockerd[16618]: time="2023-04-12T09:41:11.880574401+03:00" level=inf>
+Apr 12 09:41:11 i109154743 dockerd[16618]: time="2023-04-12T09:41:11.903623686+03:00" level=inf>
+Apr 12 09:41:11 i109154743 dockerd[16618]: time="2023-04-12T09:41:11.921414163+03:00" level=inf>
+Apr 12 09:41:11 i109154743 dockerd[16618]: time="2023-04-12T09:41:11.922371862+03:00" level=inf>
+Apr 12 09:41:11 i109154743 dockerd[16618]: time="2023-04-12T09:41:11.934682151+03:00" level=inf>
+Apr 12 09:41:11 i109154743 systemd[1]: Started Docker Application Container Engine.
+Apr 12 09:41:11 i109154743 dockerd[16618]: time="2023-04-12T09:41:11.939329762+03:00" level=inf>
+lines 1-21/21 (END)
+
+Докер без судо.
+
+kokorevpv@i109154743:~$ sudo usermod -aG docker kokorevpv
+kokorevpv@i109154743:~$ su - kokorevpv
+Password: 
+kokorevpv@i109154743:~$ id -nG
+kokorevpv adm cdrom sudo dip plugdev input lpadmin sambashare docker
+kokorevpv@i109154743:~$ 
+
+
+
+
+3. Запустить контейнер с Ubuntu.
+
+kokorevpv@i109154743:~$ docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+kokorevpv@i109154743:~$ docker search ubuntu
+NAME                             DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+ubuntu                           Ubuntu is a Debian-based Linux operating sys…   15825     [OK]       
+websphere-liberty                WebSphere Liberty multi-architecture images …   293       [OK]       
+open-liberty                     Open Liberty multi-architecture images based…   59        [OK]       
+neurodebian                      NeuroDebian provides neuroscience research s…   99        [OK]       
+ubuntu-debootstrap               DEPRECATED; use "ubuntu" instead                50        [OK]       
+ubuntu-upstart                   DEPRECATED, as is Upstart (find other proces…   112       [OK]       
+ubuntu/nginx                     Nginx, a high-performance reverse proxy & we…   84                   
+ubuntu/cortex                    Cortex provides storage for Prometheus. Long…   3                    
+ubuntu/squid                     Squid is a caching proxy for the Web. Long-t…   54                   
+ubuntu/apache2                   Apache, a secure & extensible open-source HT…   57                   
+ubuntu/mysql                     MySQL open source fast, stable, multi-thread…   45                   
+ubuntu/kafka                     Apache Kafka, a distributed event streaming …   29                   
+ubuntu/bind9                     BIND 9 is a very flexible, full-featured DNS…   51                   
+ubuntu/redis                     Redis, an open source key-value store. Long-…   17                   
+ubuntu/prometheus                Prometheus is a systems and service monitori…   40                   
+ubuntu/postgres                  PostgreSQL is an open source object-relation…   27                   
+ubuntu/zookeeper                 ZooKeeper maintains configuration informatio…   5                    
+ubuntu/grafana                   Grafana, a feature rich metrics dashboard & …   9                    
+ubuntu/memcached                 Memcached, in-memory keyvalue store for smal…   5                    
+ubuntu/prometheus-alertmanager   Alertmanager handles client alerts from Prom…   8                    
+ubuntu/dotnet-deps               Chiselled Ubuntu for self-contained .NET & A…   7                    
+ubuntu/dotnet-runtime            Chiselled Ubuntu runtime image for .NET apps…   5                    
+ubuntu/cassandra                 Cassandra, an open source NoSQL distributed …   2                    
+ubuntu/dotnet-aspnet             Chiselled Ubuntu runtime image for ASP.NET a…   4                    
+ubuntu/telegraf                  Telegraf collects, processes, aggregates & w…   4                    
+kokorevpv@i109154743:~$ docker pull ubuntu
+Using default tag: latest
+latest: Pulling from library/ubuntu
+2ab09b027e7f: Pull complete 
+Digest: sha256:67211c14fa74f070d27cc59d69a7fa9aeff8e28ea118ef3babc295a0428a6d21
+Status: Downloaded newer image for ubuntu:latest
+docker.io/library/ubuntu:latest
+kokorevpv@i109154743:~$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+ubuntu       latest    08d22c0ceb15   5 weeks ago   77.8MB
+kokorevpv@i109154743:~$ docker run -it ubuntu
+root@c9bca1cbb3f0:/# 
